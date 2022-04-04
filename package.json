@@ -1,0 +1,20 @@
+{
+  "name": "craft-vite-server-test",
+  "description": "Test of Craft + Vite",
+  "version": "0.0.0",
+  "devDependencies": {
+    "@nabla/vite-plugin-eslint": "^1.4.0",
+    "@vitejs/plugin-legacy": "^1.8.0",
+    "sass": "^1.49.11",
+    "vite": "^2.9.1",
+    "vite-plugin-restart": "^0.1.1"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1",
+    "reset.css": "^2.0.2"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  }
+}

@@ -1,0 +1,99 @@
+dateModified: 1649097424
+email:
+  fromEmail: chris@malven.co
+  fromName: 'Craft Vite Server Test'
+  transportType: craft\mail\transportadapters\Sendmail
+meta:
+  __names__:
+    861e167e-8a7c-45ee-84d8-e7ac3471816f: 'Craft Vite Server Test' # Craft Vite Server Test
+    ce808882-c1c0-42c1-931f-b866ad61dce2: 'Craft Vite Server Test' # Craft Vite Server Test
+    eaf6f1d3-dcb6-4811-9491-a5cf50bdcf33: Common # Common
+plugins:
+  assetrev:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  aws-s3:
+    edition: standard
+    enabled: true
+    schemaVersion: '1.2'
+  blitz:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.10.0
+  cp-field-inspect:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  cp-nav:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.0.7
+  dumper:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  empty-coalesce:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  environment-label:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  expanded-singles:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  imager-x:
+    edition: lite
+    enabled: true
+    schemaVersion: 3.0.0
+  matrixmate:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  redactor:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.3.0
+  seomatic:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.11
+  snitch:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.1.0
+  super-table:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.2.1
+  svgplaceholder:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  twig-perversion:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  typedlinkfield:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  wordsmith:
+    edition: standard
+    enabled: true
+    schemaVersion: 0.0.0.0
+system:
+  edition: solo
+  live: true
+  name: 'Craft Vite Server Test'
+  schemaVersion: 3.7.33
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  requireEmailVerification: true

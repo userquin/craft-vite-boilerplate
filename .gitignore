@@ -1,0 +1,52 @@
+# Craft 3
+# ---------------------------
+/storage/*
+!/storage/rebrand
+/templates/_svg/**/*
+
+/web/*
+!/web/favicons/
+!/web/fonts/
+!/web/.htaccess
+!/web/index.php
+!/web/*.txt
+!/web/*.png
+!/web/*.ico
+!/web/*.webmanifest
+!/web/*.svg
+!/web/*.xml
+
+# Package Managers
+# ---------------------------
+/vendor/
+/node_modules/
+# System
+# ---------------------------
+.DS_Store
+Thumbs.db
+
+# Editors
+# ---------------------------
+*.esproj
+*.sublime-project
+*.sublime-workspace
+*.tmproj
+*.tmproject
+.idea
+.project
+.settings
+.vscode
+
+# Temp
+# ---------------------------
+.env
+*.log
+/tmp
+
+# VM
+# ---------------------------
+.vagrant/*
+
+# Compiled Files
+# ---------------------------
+/dist/
