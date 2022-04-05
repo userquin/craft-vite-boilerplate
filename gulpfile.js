@@ -14,7 +14,7 @@ global.GULP_CONFIG = {
     templateDist: 'templates/',
 
     imageSrc: 'src/images/',
-    imageDist: 'web/dist/images/',
+    imageDist: 'web/static/',
   },
 };
 
