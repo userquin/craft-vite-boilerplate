@@ -1,4 +1,4 @@
-# Craft Vite Server Test
+# Craft Vite Boilerplate
 
 Test of Craft + Vite
 
