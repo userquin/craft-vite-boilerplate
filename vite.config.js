@@ -1,7 +1,6 @@
 import legacy from '@vitejs/plugin-legacy';
 import ViteRestart from 'vite-plugin-restart';
 import createPartials from "./vite-create-partials.js";
-import path from 'path';
 
 // https://vitejs.dev/config/
 export default ({ command }) => {
