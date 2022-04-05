@@ -12,7 +12,7 @@ export default defineConfig({
     outDir: './web/dist/',
     rollupOptions: {
       input: {
-        script: './src/scripts/main.js',
+        scripts: './src/scripts/main.js',
         styles: './src/styles/main.scss',
       },
     },
