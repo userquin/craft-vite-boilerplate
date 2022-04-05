@@ -12,6 +12,7 @@ export default defineConfig({
     emptyOutDir: true,
     manifest: true,
     outDir: './web/dist/',
+    assetsDir: './web/static/',
     rollupOptions: {
       input: {
         scripts: './src/scripts/main.js',
