@@ -41,10 +41,10 @@ export default function(options = {}) {
       const scripts = (files.js || [])
         .map(({ fileName }) => {
           return fileName
-            ? `\n<script type="module" src="${publicPath}${fileName}"></script>`
+            ? `<script type="module" src="${publicPath}${fileName}"></script>\n`
             : '';
         })
-        .join('\n');
+        .join('');
 
       fs.appendFile(`${outputDir}/scripts.twig`, scripts, (err) => {
         if (err) throw err;
@@ -52,9 +52,9 @@ export default function(options = {}) {
 
       const links = (files.css || [])
         .map(({ fileName }) => {
-          return `<link href="${publicPath}${fileName}" rel="stylesheet">`;
+          return `<link href="${publicPath}${fileName}" rel="stylesheet">\n`;
         })
-        .join('\n');
+        .join('');
 
       fs.appendFile(`${outputDir}/links.twig`, links, (err) => {
         if (err) throw err;
