@@ -15,8 +15,6 @@ const getFiles = (bundle) => {
   const result = {};
   for (const file of files) {
     const { fileName } = file;
-    // eslint-disable-next-line no-console
-    console.log({ fileName });
     const extension = extname(fileName).substring(1);
 
     result[extension] = [file].concat(result[extension] || []);
