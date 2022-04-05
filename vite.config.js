@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import legacy from '@vitejs/plugin-legacy';
 import viteRestart from 'vite-plugin-restart';
 import createPartials from './vite-create-partials.js';
 
@@ -20,9 +19,6 @@ export default defineConfig({
   },
   plugins: [
     createPartials(),
-    legacy({
-      targets: ['defaults', 'not IE 11'],
-    }),
     viteRestart({
       reload: ['./templates/**/*'],
     }),
