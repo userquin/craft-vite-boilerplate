@@ -6,6 +6,7 @@ import craftPartials from './vite-plugin-craft-partials.js';
 
 export default defineConfig({
   base: '/dist/',
+  publicDir: './web/',
   build: {
     emptyOutDir: true,
     manifest: true,
