@@ -3,7 +3,7 @@
 Test of Craft + Vite
 
 ## Setup
-- Create a MySQL-compatible database called `craft-vite-server-test`
+- Create a MySQL-compatible database called `craft-vite-boilerplate`
 - `composer install`
 - `cp env.sample .env` and modify the contents of `.env` to match your setup
 

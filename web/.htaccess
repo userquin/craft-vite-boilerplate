@@ -20,16 +20,16 @@
   # Force redirect to HTTPS
   # RewriteCond %{HTTP:X-Forwarded-Proto} !https
   # RewriteCond %{HTTPS} off
-  # RewriteCond %{HTTP_HOST} ^craft-vite-server-test.com [NC]
+  # RewriteCond %{HTTP_HOST} ^craft-vite-boilerplate.com [NC]
   # RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=302,L]
 
   # Redirect non-www to www
-  # RewriteCond %{HTTP_HOST} !^www.craft-vite-server-test.com [NC]
-  # RewriteRule ^(.*)$ https://www.craft-vite-server-test.com/$1 [L,R=301,NC]
+  # RewriteCond %{HTTP_HOST} !^www.craft-vite-boilerplate.com [NC]
+  # RewriteRule ^(.*)$ https://www.craft-vite-boilerplate.com/$1 [L,R=301,NC]
 
   # Redirect www to non-www
-  # RewriteCond %{HTTP_HOST} ^www.craft-vite-server-test.com [NC]
-  # RewriteRule ^(.*)$ https://craft-vite-server-test.com/$1 [L,R=301,NC]
+  # RewriteCond %{HTTP_HOST} ^www.craft-vite-boilerplate.com [NC]
+  # RewriteRule ^(.*)$ https://craft-vite-boilerplate.com/$1 [L,R=301,NC]
 
   ###############################
   # Start: Specific URL Rewrites
