@@ -1,16 +1,16 @@
-                                                 import path, { extname } from "path";
-import fs from "fs";
+import path, { extname } from 'path';
+import fs from 'fs';
 
 const defaults = {
-  outputDir: path.resolve(process.cwd(), "./templates/_partials"),
-  publicPath: "/dist/",
+  outputDir: path.resolve(process.cwd(), './templates/_partials'),
+  publicPath: '/dist/',
 };
 
 const getFiles = (bundle) => {
   const files = Object.values(bundle).filter(
     (file) =>
-      file.type === "chunk" ||
-      (typeof file.type === "string" ? file.type === "asset" : file.isAsset)
+      file.type === 'chunk' ||
+      (typeof file.type === 'string' ? file.type === 'asset' : file.isAsset),
   );
   const result = {};
   for (const file of files) {
@@ -28,7 +28,7 @@ const getFiles = (bundle) => {
 export default function(options = {}) {
   const { outputDir, publicPath } = Object.assign({}, defaults, options);
   return {
-    name: "Create partials",
+    name: 'Create partials',
     async buildStart() {
       if (fs.existsSync(`${outputDir}/scripts.twig`)) {
         fs.unlinkSync(`${outputDir}/scripts.twig`);
@@ -44,9 +44,9 @@ export default function(options = {}) {
         .map(({ fileName }) => {
           return fileName
             ? `\n<script type="module" src="${publicPath}${fileName}"></script>`
-            : "";
+            : '';
         })
-        .join("\n");
+        .join('\n');
 
       fs.appendFile(`${outputDir}/scripts.twig`, scripts, (err) => {
         if (err) throw err;
@@ -56,7 +56,7 @@ export default function(options = {}) {
         .map(({ fileName }) => {
           return `<link href="${publicPath}${fileName}" rel="stylesheet">`;
         })
-        .join("\n");
+        .join('\n');
 
       fs.appendFile(`${outputDir}/links.twig`, links, (err) => {
         if (err) throw err;
