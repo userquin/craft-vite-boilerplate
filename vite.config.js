@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import viteRestart from 'vite-plugin-restart';
 import craftPartials from './vite-plugin-craft-partials.js';
+import sassGlobImports from 'vite-plugin-sass-glob-import';
 
 // https://vitejs.dev/config/
 
@@ -19,6 +20,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    sassGlobImports(),
     craftPartials(),
     viteRestart({
       reload: ['./templates/**/*'],
