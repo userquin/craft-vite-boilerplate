@@ -16,12 +16,8 @@ First, make sure you have [NodeJS](http://nodejs.org) installed. Then:
 
 ### Development Server
 
-While `gulp` is running, you can access the site at http://localhost:XXXX
+While the development server is running, you can access the site at http://craft-vite.test
 
 ## Deployment
 
-Run `NODE_ENV=production npm run build` to build prepare all assets for deployment.
-
-## Analyze Webpack Bundle
-
-`ANALYZE_BUNDLE=true npm run build` will output a report breaking down final webpack bundle sizes.
+Run `npm run build` to build prepare all assets for deployment.
