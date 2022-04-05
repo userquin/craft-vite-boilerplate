@@ -1,7 +1,8 @@
-import _ from 'lodash';
+import('lodash').then(({ default: _ }) => {
+  console.log(
+    _.map(['Hello', 'World'], (item) => {
+      return item;
+    }).join(' '),
+  );
+}).catch(error => 'An error occurred while loading the module');
 
-console.log(
-  _.map(['Hello', 'World'], (item) => {
-    return item;
-  }).join(' '),
-);
