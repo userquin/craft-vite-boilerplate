@@ -39,22 +39,22 @@ export default function(options = {}) {
     async writeBundle(output, bundle) {
       const files = getFiles(bundle);
       const scripts = (files.js || [])
-        .map(({ fileName }) => {
-          return fileName
-            ? `<script type="module" src="${publicPath}${fileName}"></script>\n`
-            : '';
-        })
-        .join('');
+        .reduce((importsString, file) => {
+          return file.fileName && file.isEntry
+            ? importsString + `<script type="module" src="${publicPath}${file.fileName}"></script>\n`
+            : importsString;
+        }, '');
 
       fs.appendFile(`${outputDir}/scripts.twig`, scripts, (err) => {
         if (err) throw err;
       });
 
       const links = (files.css || [])
-        .map(({ fileName }) => {
-          return `<link href="${publicPath}${fileName}" rel="stylesheet">\n`;
-        })
-        .join('');
+        .reduce((linksString, file) => {
+          return file.fileName
+            ? linksString + `<link href="${publicPath}${file.fileName}" rel="stylesheet">\n`
+            : linksString;
+        }, '');
 
       fs.appendFile(`${outputDir}/links.twig`, links, (err) => {
         if (err) throw err;
