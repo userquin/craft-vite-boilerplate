@@ -1,6 +1,6 @@
 import legacy from '@vitejs/plugin-legacy';
-import ViteRestart from 'vite-plugin-restart';
-import createPartials from "./vite-create-partials.js";
+import viteRestart from 'vite-plugin-restart';
+import createPartials from './vite-create-partials.js';
 
 // https://vitejs.dev/config/
 export default ({ command }) => {
@@ -19,7 +19,7 @@ export default ({ command }) => {
       legacy({
         targets: ['defaults', 'not IE 11'],
       }),
-      ViteRestart({
+      viteRestart({
         reload: ['./templates/**/*'],
       }),
     ],
