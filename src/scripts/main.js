@@ -5,4 +5,3 @@ import('lodash').then(({ default: _ }) => {
     }).join(' '),
   );
 }).catch(error => 'An error occurred while loading the module');
-
