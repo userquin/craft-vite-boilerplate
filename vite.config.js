@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import viteRestart from 'vite-plugin-restart';
-import createPartials from './vite-create-partials.js';
+import craftPartials from './vite-plugin-craft-partials.js';
 
 // https://vitejs.dev/config/
 
@@ -18,7 +18,7 @@ export default defineConfig({
     },
   },
   plugins: [
-    createPartials(),
+    craftPartials(),
     viteRestart({
       reload: ['./templates/**/*'],
     }),
