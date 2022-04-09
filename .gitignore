@@ -3,8 +3,7 @@
 /storage/*
 !/storage/rebrand
 /templates/_svg/**/*
-/templates/_partials/links.twig
-/templates/_partials/scripts.twig
+/templates/_partials/vite-dist.twig
 
 /web/*
 !/web/favicons/

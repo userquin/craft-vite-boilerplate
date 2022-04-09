@@ -25,38 +25,41 @@ const getFiles = (bundle) => {
 
 export default function(options = {}) {
   const { outputDir, publicPath } = Object.assign({}, defaults, options);
+
+  const outputFilePath = `${outputDir}/vite-dist.twig`;
+
   return {
     name: 'Create partials',
     async buildStart() {
-      if (fs.existsSync(`${outputDir}/scripts.twig`)) {
-        fs.unlinkSync(`${outputDir}/scripts.twig`);
-      }
-      if (fs.existsSync(`${outputDir}/links.twig`)) {
-        fs.unlinkSync(`${outputDir}/links.twig`);
+      if (fs.existsSync(outputFilePath)) {
+        fs.unlinkSync(outputFilePath);
       }
     },
 
     async writeBundle(output, bundle) {
       const files = getFiles(bundle);
-      const scripts = (files.js || [])
-        .reduce((importsString, file) => {
-          return file.fileName && file.isEntry
-            ? importsString + `<script type="module" src="${publicPath}${file.fileName}"></script>\n`
-            : importsString;
-        }, '');
+      let fileContents = '';
 
-      fs.appendFile(`${outputDir}/scripts.twig`, scripts, (err) => {
-        if (err) throw err;
-      });
-
+      // Add style links
       const links = (files.css || [])
         .reduce((linksString, file) => {
           return file.fileName
             ? linksString + `<link href="${publicPath}${file.fileName}" rel="stylesheet">\n`
             : linksString;
         }, '');
+      fileContents += `{% html at head %}\n${links}{% endhtml %}\n`;
 
-      fs.appendFile(`${outputDir}/links.twig`, links, (err) => {
+      // Add scripts
+      const scripts = (files.js || [])
+        .reduce((importsString, file) => {
+          return file.fileName && file.isEntry
+            ? importsString + `<script type="module" src="${publicPath}${file.fileName}"></script>\n`
+            : importsString;
+        }, '');
+      fileContents += `\n{% html at endBody %}\n${scripts}{% endhtml %}\n`;
+
+      // Write to file
+      fs.appendFile(outputFilePath, fileContents, (err) => {
         if (err) throw err;
       });
     },

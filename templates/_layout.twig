@@ -4,12 +4,15 @@
  # =========================================================
 #}
 
+{% include ['_partials/vite-dist', '_partials/vite-dev'] ignore missing %}
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {% include ['_partials/links', '_partials/links-dev'] ignore missing %}
+  <title>Craft Vite Boilerplate</title>
+  {{ head() }}
 </head>
 
 <body>
@@ -17,6 +20,6 @@
     {% block content %}{% endblock %}
   </main>
 
-  {% include ['_partials/scripts', '_partials/scripts-dev'] ignore missing %}
+  {{ endBody() }}
 </body>
 </html>
