@@ -7,10 +7,10 @@ import sassGlobImports from 'vite-plugin-sass-glob-import';
 
 export default defineConfig(({ command, mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-  
+
   return {
-    base: '/dist/',
-    publicDir: './web/',
+    base: command === 'serve' ? '' : '/dist/',
+    publicDir: './web/dist',
     server: {
       port: process.env.VITE_DEV_PORT || 3000,
     },
@@ -18,12 +18,8 @@ export default defineConfig(({ command, mode }) => {
       emptyOutDir: true,
       manifest: true,
       outDir: './web/dist/',
-      assetsDir: './web/static/',
       rollupOptions: {
-        input: {
-          scripts: './src/scripts/main.js',
-          styles: './src/styles/main.scss',
-        },
+        input: './src/entry.html',
       },
     },
     plugins: [

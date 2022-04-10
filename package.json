@@ -8,6 +8,7 @@
     "@malven/stylelint-config": "^1.3.2",
     "eslint": "^8.12.0",
     "gulp": "^4.0.2",
+    "node-html-parser": "^5.3.3",
     "sass": "^1.49.11",
     "stylelint": "^14.6.1",
     "stylelint-scss": "^4.2.0",
@@ -17,7 +18,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "normalize.css": "^8.0.1",
     "reset.css": "^2.0.2"
   },
   "scripts": {
