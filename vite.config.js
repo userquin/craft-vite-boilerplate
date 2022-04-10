@@ -10,7 +10,7 @@ export default defineConfig(({ command, mode }) => {
 
   return {
     base: command === 'serve' ? '' : '/dist/',
-    publicDir: './web/dist',
+    publicDir: './web',
     server: {
       port: process.env.VITE_DEV_PORT || 3000,
     },
