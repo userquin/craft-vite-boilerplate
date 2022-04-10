@@ -2,6 +2,26 @@
 // Main
 // ===============================================================
 
+// Vendor
+
+@import 'reset.css/reset.css';
+
+// Styles
+
 body {
+  padding: 4vw;
   background-color: silver;
+
+  > * + * {
+    margin-top: 30px;
+  }
+}
+
+.image-test {
+  width: 98px;
+  height: 81px;
+
+  &:nth-child(3) {
+    background: url('/static/images/svg/icon/logo.svg') no-repeat top left;
+  }
 }
