@@ -78,7 +78,6 @@ export default function craftPartials(options = {}) {
       if (mode === 'production') return;
 
       const inputFile = fs.readFileSync(input);
-      console.log(inputFile);
       const { scripts, links, meta } = parseHtml(inputFile.toString(), {});
 
       fs.writeFileSync(
