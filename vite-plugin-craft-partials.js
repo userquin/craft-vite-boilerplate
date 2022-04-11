@@ -1,66 +1,109 @@
-import path, { extname } from 'path';
+import { parse } from 'node-html-parser';
 import fs from 'fs';
+import path from 'path';
 
-const defaults = {
-  outputDir: path.resolve(process.cwd(), './templates/_partials'),
-  publicPath: '/dist/',
-};
-
-const getFiles = (bundle) => {
-  const files = Object.values(bundle).filter(
-    (file) =>
-      file.type === 'chunk' ||
-      (typeof file.type === 'string' ? file.type === 'asset' : file.isAsset),
-  );
-  const result = {};
-  for (const file of files) {
-    const { fileName } = file;
-    const extension = extname(fileName).substring(1);
-
-    result[extension] = [file].concat(result[extension] || []);
-  }
-
-  return result;
-};
-
-export default function(options = {}) {
-  const { outputDir, publicPath } = Object.assign({}, defaults, options);
-
-  const outputFilePath = `${outputDir}/vite-dist.twig`;
+/**
+ * Separate our HTML string into the parts we care about
+ * @param html
+ * @returns {{meta: HTMLElement[], links: HTMLElement[], scripts: HTMLElement[]}}
+ */
+function parseHtml(html) {
+  const root = parse(html);
+  const scripts = root.querySelectorAll('script');
+  const links = root.querySelectorAll('link');
+  const meta = root.querySelectorAll('meta');
 
   return {
-    name: 'Create partials',
-    async buildStart() {
-      if (fs.existsSync(outputFilePath)) {
-        fs.unlinkSync(outputFilePath);
-      }
+    scripts,
+    links,
+    meta,
+  };
+}
+
+export default function craftPartials(options = {}) {
+  const { outputFile, template } = Object.assign(
+    {},
+    {
+      // Path to the Twig partial that will be included by Craft
+      outputFile: './templates/_partials/vite.twig',
+
+      // Template to use when generating Twig partials
+      template({ scripts, links, meta, proxyUrl, mode = 'production' }) {
+        const scriptTags = scripts.map(script => {
+          script.setAttribute(
+            'src',
+            script.getAttribute('src').replace('./', `${proxyUrl}/src/`),
+          );
+          return script;
+        });
+
+        const linkTags = links.map(link => {
+          link.setAttribute(
+            'href',
+            link.getAttribute('href').replace('./', `${proxyUrl}/src/`),
+          );
+          return link;
+        });
+
+        let templateString = `{% html at head %}${meta.toString()}${linkTags.toString()}{% endhtml %}
+{% html at endBody %}${scriptTags.toString()}{% endhtml %}`;
+
+        return mode === 'development'
+          ? `<script type="module" src="${proxyUrl}/@vite/client"></script>${templateString}`
+          : templateString;
+      },
+    },
+    options,
+  );
+
+  let config = null;
+  let proxyUrl = null;
+
+  return {
+    name: 'craft-twig-partials',
+
+    /**
+     * Set the resolved vite config
+     */
+    configResolved(resolvedConfig) {
+      config = resolvedConfig;
+      proxyUrl = `http://localhost:${config.server.port}`;
     },
 
-    async writeBundle(output, bundle) {
-      const files = getFiles(bundle);
-      let fileContents = '';
+    /**
+     * Write Twig partial in development mode
+     */
+    buildStart({ input }) {
+      const { mode } = config;
+      if (mode === 'production') return;
 
-      // Add style links
-      const links = (files.css || [])
-        .reduce((linksString, file) => {
-          return file.fileName
-            ? linksString + `<link href="${publicPath}${file.fileName}" rel="stylesheet">\n`
-            : linksString;
-        }, '');
-      fileContents += `{% html at head %}\n${links}{% endhtml %}\n`;
+      const inputFile = fs.readFileSync(input);
+      const { scripts, links, meta } = parseHtml(inputFile.toString(), {});
 
-      // Add scripts
-      const scripts = (files.js || [])
-        .reduce((importsString, file) => {
-          return file.fileName && file.isEntry
-            ? importsString + `<script type="module" src="${publicPath}${file.fileName}"></script>\n`
-            : importsString;
-        }, '');
-      fileContents += `\n{% html at endBody %}\n${scripts}{% endhtml %}\n`;
+      fs.writeFileSync(
+        outputFile,
+        template({ scripts, links, meta, mode, proxyUrl }),
+      );
+    },
 
-      // Write to file
-      fs.appendFile(outputFilePath, fileContents, (err) => {
-        if (err) throw err;
+    /**
+     * Write Twig partial in production mode
+     */
+    transformIndexHtml(html) {
+      const { mode } = config;
+      if (mode !== 'production') return;
+
+      const { scripts, links, meta } = parseHtml(html);
+      fs.writeFileSync(outputFile, template({ scripts, links, meta, mode }));
+    },
+
+    /**
+     * Remove `src` files from `dist`
+     */
+    closeBundle() {
+      fs.rmSync(path.resolve(config.publicDir, './src'), {
+        recursive: true,
+        force: true,
       });
     },
   };
