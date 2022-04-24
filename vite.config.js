@@ -1,6 +1,6 @@
 import { defineConfig, loadEnv } from 'vite';
 import viteRestart from 'vite-plugin-restart';
-import craftPartials from './vite-plugin-craft-partials.js';
+import { vitePluginCraftCms } from 'vite-plugin-craftcms';
 import sassGlobImports from 'vite-plugin-sass-glob-import';
 
 // https://vitejs.dev/config/
@@ -9,10 +9,11 @@ export default defineConfig(({ command, mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   return {
-    base: command === 'serve' ? '' : '/dist/',
-    publicDir: './web',
+    base: '/dist/',
+    publicDir: './web/static',
     server: {
       port: process.env.VITE_DEV_PORT || 3000,
+      host: true,
     },
     build: {
       emptyOutDir: true,
@@ -24,7 +25,9 @@ export default defineConfig(({ command, mode }) => {
     },
     plugins: [
       sassGlobImports(),
-      craftPartials(),
+      vitePluginCraftCms({
+        outputFile: './templates/_partials/vite.twig',
+      }),
       viteRestart({
         reload: ['./templates/**/*'],
       }),
