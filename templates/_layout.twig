@@ -14,7 +14,8 @@
   <title>Craft Vite Boilerplate</title>
   
   {# Test font preloading #}
-  <link rel="preload" href="/static/fonts/work-sans.woff" as="font" type="font/woff" crossorigin>
+  {% import "_partials/vite" as vite %}
+  <link rel="preload" href="{{ vite.url('/fonts/work-sans.woff') }}" as="font" type="font/woff" crossorigin>
 </head>
 
 <body>

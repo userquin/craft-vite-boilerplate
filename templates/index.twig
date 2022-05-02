@@ -10,7 +10,8 @@
   {# Test image in HTML #}
   <p>Twig Image Test</p>
   <div class="image-test">
-    <img src="/dist/images/svg/icon/logo.svg" alt="">
+    {% import "_partials/vite" as vite %}
+    <img src="{{ vite.url('/images/svg/icon/logo.svg') }}" alt="">
   </div>
   
   {# Test image in CSS #}

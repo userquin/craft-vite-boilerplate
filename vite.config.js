@@ -5,12 +5,12 @@ import sassGlobImports from 'vite-plugin-sass-glob-import';
 
 // https://vitejs.dev/config/
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ _command, mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   return {
     base: '/dist/',
-    publicDir: './web/static',
+    publicDir: './src/static',
     server: {
       port: process.env.VITE_DEV_PORT || 3000,
       host: true,
