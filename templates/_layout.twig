@@ -12,6 +12,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Craft Vite Boilerplate</title>
+  
+  {# Test font preloading #}
+  {% import "_partials/vite" as vite %}
+  <link rel="preload" href="{{ vite.url('/fonts/work-sans.woff') }}" as="font" type="font/woff" crossorigin>
 </head>
 
 <body>

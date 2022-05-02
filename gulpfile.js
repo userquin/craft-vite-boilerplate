@@ -1,4 +1,4 @@
-const { images, svg } = require('@malven/gulp-tasks');
+const { images, imagesClean, svg } = require('@malven/gulp-tasks');
 const gulp = require('gulp');
 
 //
@@ -14,7 +14,7 @@ global.GULP_CONFIG = {
     templateDist: 'templates/',
 
     imageSrc: 'src/images/',
-    imageDist: 'web/static/images/',
+    imageDist: 'src/static/images/',
   },
 };
 
@@ -31,6 +31,7 @@ const watch = function(done) {
 
 module.exports = {
   default: gulp.series(
+    imagesClean,
     gulp.parallel(
       watch,
       images,
@@ -39,6 +40,7 @@ module.exports = {
     done => done(),
   ),
   build: gulp.series(
+    imagesClean,
     images,
     svg,
     done => done(),

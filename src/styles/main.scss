@@ -6,11 +6,21 @@
 
 @import 'reset.css/reset.css';
 
+// Fonts
+
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/work-sans.woff') format('woff')
+}
+
 // Styles
 
 body {
   padding: 4vw;
   background-color: silver;
+  font-family: 'Work Sans', sans-serif;
 
   > * + * {
     margin-top: 30px;
@@ -21,7 +31,7 @@ body {
   width: 98px;
   height: 81px;
 
-  &:nth-child(3) {
-    background: url('/static/images/svg/icon/logo.svg') no-repeat top left;
+  &:nth-child(5) {
+    background: url('/images/svg/icon/logo.svg') no-repeat top left;
   }
 }

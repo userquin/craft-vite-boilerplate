@@ -5,9 +5,9 @@
 /templates/_svg/**/*
 /templates/_partials/vite.twig
 
-/web/*
+/src/static/images/
+/web/**/*
 !/web/favicons/
-!/web/fonts/
 !/web/.htaccess
 !/web/index.php
 !/web/*.txt
