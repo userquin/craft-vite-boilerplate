@@ -27,6 +27,7 @@ export default defineConfig(({ _command, mode }) => {
       sassGlobImports(),
       vitePluginCraftCms({
         outputFile: './templates/_partials/vite.twig',
+        devServerBaseAddress: 'http://10.0.1.136',
       }),
       viteRestart({
         reload: ['./templates/**/*'],
