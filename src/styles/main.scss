@@ -31,7 +31,7 @@ body {
   width: 98px;
   height: 81px;
 
-  &:nth-child(5) {
+  &.image-test-sass {
     background: url('/images/svg/icon/logo.svg') no-repeat top left;
   }
 }
